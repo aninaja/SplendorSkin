@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Treatment Area
+{% endblock %}
+
+{% block content %}
+    <h1> Add Treatment Area</h1>
+    <form method="POST">
+        {% csrf_token %}
+         <div class="form-group">
+			<label>Treatment Area:</label>
+			{{form.area}}
+		</div>
+
+        <button type="submit" class="btn btn-md btn-success">Add</button>
+
+        {% if messages %}
+            {% for message in messages %}
+                {{message}}
+            {% endfor %}
+        {% endif %}
+
+    </form>
+
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{service.name}}
+{% endblock %}
+
+{% block content %}
+<h1>{{ service.name }} {{ treatment.name }}</h1>
+    <form method="POST" action="{% url 'services:treatment_edit' treatment.id %}">
+        {% csrf_token %}
+
+        <div class="form-group">
+			<label>Service Name:</label>
+			{{form.service_id}}
+		</div>
+
+        <div class="form-group">
+			<label>Treatment Name:</label>
+			{{form.name}}
+		</div>
+
+		<div class="form-group">
+			<label>Description:</label>
+			{{form.description}}
+		</div>
+
+        <div class="form-group">
+			<label>Treatment Area:</label>
+			{{form.area_id}}
+		</div>
+
+        <div class="form-group">
+			<label>Pricing Type:</label>
+			{{form.type_id}}
+		</div>
+
+         <div class="form-group">
+			<label>Price:</label>
+			{{form.price}}
+		</div>
+
+        <button type="submit" class="btn btn-info mt-2">Update</button>
+
+    </form>
+
+{% endblock %}

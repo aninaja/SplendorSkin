@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Treatment List
+{% endblock %}
+
+{% block content %}
+	<h5><a href="{% url 'services:treatment_create' %}">Add Treatment</a></h5>
+
+	<div class="table responsive">
+		<table class="table table-bordered table-striped table-hover">
+			 <thead class="thead-dark">
+				<tr>
+					<th>ID</th>
+					<th>Services</th>
+					<th>Treatments</th>
+                    <th>Description</th>
+					<th>Treatment Area</th>
+					<th>Pricing Type</th>
+					<th>Price</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				{% for treatment in object_list %}
+					<tr>
+						<td>{{ treatment.id }}</td>
+						<td>{{ treatment.service_id }}</td>
+						<td>{{ treatment.name }}</td>
+						<td>{{ treatment.description }}</td>
+						<td>{{ treatment.area_id }}</td>
+						<td>{{ treatment.type_id }}</td>
+						<td>{{ treatment.price }}</td>
+						<td><a href="{% url 'services:treatment_edit' treatment.id %}" class="btn btn-md btn-info">
+							Edit</a>
+						</td>
+
+					</tr>
+				{% endfor %}
+
+			</tbody>
+		</table>
+	</div>
+
+{% endblock %}

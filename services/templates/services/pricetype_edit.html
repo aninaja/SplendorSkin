@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Pricing Type
+{% endblock %}
+
+{% block content %}
+    <h1> Add Pricing Type </h1>
+    <form method="POST">
+        {% csrf_token %}
+         <div class="form-group">
+			<label>Pricing Type:</label>
+			{{form.type}}
+		</div>
+
+         <button type="submit" class="btn btn-md btn-info">Update</button>
+    </form>
+{% endblock %}

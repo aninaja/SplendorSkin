@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Price Type List
+{% endblock %}
+
+{% block content %}
+    <h5><a href="{% url 'services:pricetype_create' %}">Add Price Type</a></h5>
+
+	<div class="table responsive">
+		<table class="table table-bordered table-striped table-hover">
+			 <thead class="thead-dark">
+				<tr>
+					<th>ID</th>
+					<th>Price Type</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				{% for type in ptype_list %}
+					<tr>
+						<td>{{ type.id }}</td>
+						<td>{{ type.type }}</td>
+						<td><a href="{% url 'services:ptype_edit' type.id %}" class="btn btn-md btn-info">
+							Edit</a>
+						</td>
+
+					</tr>
+				{% endfor %}
+
+			</tbody>
+		</table>
+	</div>
+
+{% endblock %}

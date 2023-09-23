@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Services
+{% endblock %}
+
+{% block content %}
+<h1>Services</h1>
+    <form method="POST" action="{% url 'services:service_create' %}">
+        {% csrf_token%}
+        <div class="form-group">
+			<label>Service Name:</label>
+			{{form.name}}
+            <span class="help-block">{{ form.name.errors }}</span>
+		</div>
+
+        <div class="form-group">
+            <label>Description:</label>
+            {{form.description}}
+        </div>
+        <button type="submit" class="btn btn-md btn-success">Add</button>
+    </form>
+{% endblock %}
+

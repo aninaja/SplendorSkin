@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Treatment Area List
+{% endblock %}
+
+{% block content %}
+    <h5><a href="{% url 'services:treatedarea_create' %}">Add Treatment Area</a></h5>
+
+	<div class="table responsive">
+		<table class="table table-bordered table-striped table-hover">
+			 <thead class="thead-dark">
+				<tr>
+					<th>ID</th>
+					<th>Treatment Area</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				{% for area in area_list %}
+					<tr>
+						<td>{{ area.id }}</td>
+						<td>{{ area.area }}</td>
+						<td><a href="{% url 'services:area_edit' area.id %}" class="btn btn-md btn-info">
+							Edit</a>
+
+
+						</td>
+
+					</tr>
+				{% endfor %}
+
+			</tbody>
+		</table>
+	</div>
+
+{% endblock %}
