@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Accounts
+{% endblock %}
+
+{% block content %}
+<h1>Accounts</h1>
+    <form method="POST" action="">
+        {% csrf_token%}
+
+        <div class="form-group">
+			<label>First Name:</label>
+			{{form.first_name}}
+		</div>
+
+        <div class="form-group">
+			<label>Last Name:</label>
+			{{form.last_name}}
+		</div>
+		<div class="form-group">
+			<label>Middle Name:</label>
+			{{form.middle_name}}
+		</div>
+
+        <div class="form-group">
+		    <label>Birthday</label>
+		   {{form.birth_date}}
+		</div>
+
+        <div class="form-group">
+			<label>Email:</label>
+			{{form.email}}
+		</div>
+
+        <div class="form-group">
+			<label>Mobile:</label>
+			{{form.mobile}}
+		</div>
+
+		 <div class="form-group">
+			<label>Role:</label>
+			{{form.role}}
+		</div>
+
+		<div class="form-group">
+			<label>Age:</label>
+			{{form.age}}
+		</div>
+
+		<div class="form-group">
+			<label>User Image:</label>
+			<input type="file" name="image" id="image">
+		</div>
+
+
+        <button type="submit" class="btn btn-md btn-success">Add</button>
+    </form>
+{% endblock %}
+

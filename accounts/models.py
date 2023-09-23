@@ -31,11 +31,13 @@ class CustomUser(AbstractUser):
     email = models.EmailField(max_length=255, unique=True, null=False, blank=False)
     mobile = models.PositiveBigIntegerField(unique=True, null=False, blank=False)
 
+
     PATIENT = 'patient'
     THERAPIST = 'therapist'
     ADMIN = 'admin'
 
     ROLE_CHOICES = [
+        ('', '-----'),
         (PATIENT, 'Patient'),
         (THERAPIST, 'Therapist'),
         (ADMIN, 'Admin'),
