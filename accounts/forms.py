@@ -1,11 +1,15 @@
 from django import forms
 from django.core.validators import RegexValidator
 from django.forms import NumberInput
-from django.forms import ModelForm
 from .models import CustomUser
 
 
 class RegistrationForm(forms.ModelForm):
+    role = forms.ChoiceField(
+        choices=CustomUser.ROLE_CHOICES,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+
     first_name = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -39,13 +43,10 @@ class RegistrationForm(forms.ModelForm):
         ]
     )
 
-    birth_date = forms.DateField(
-        widget=NumberInput(
-        attrs={'type': 'date',
-               'class': 'form-control'},
-
-
-    ))
+    gender = forms.ChoiceField(
+        choices=CustomUser.GENDER_CHOICES,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
 
     email = forms.EmailField(
         widget=forms.TextInput(
@@ -59,28 +60,22 @@ class RegistrationForm(forms.ModelForm):
                 'class': 'form-control'}),
     )
 
-    age = forms.IntegerField(
-        widget=forms.TextInput(
-            attrs={
-                'class': 'form-control'}),
-        validators=[
-            RegexValidator(
-                regex=r'^\d{1,2}$',
-                message="Age must be number",
-            ),
-        ]
+    birth_date = forms.DateField(
+        widget=NumberInput(
+            attrs={'type': 'date',
+                   'class': 'form-control'},
+        )
     )
 
     class Meta:
         model = CustomUser
         fields = [
+            'role',
             'first_name',
             'last_name',
             'middle_name',
-            'birth_date',
+            'gender',
             'email',
             'mobile',
-            'role',
-            'age',
-            'user_image',
+            'birth_date',
         ]
