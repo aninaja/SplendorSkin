@@ -6,6 +6,8 @@
 
 {% block content %}
 <h1>Services</h1>
+
+
     <form method="POST" action="{% url 'services:service_create' %}">
         {% csrf_token%}
         <div class="form-group">

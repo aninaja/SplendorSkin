@@ -17,6 +17,9 @@ def service_create(request):
     form = ServiceForm(request.POST)
     if form.is_valid():
         form.save()
+        messages.success(request,
+                         'Account updated successfully.')
+        return redirect('services:service_list')
     template_name = 'services/service_create.html'
     context = {'form': form}
     return render(request, template_name, context)
