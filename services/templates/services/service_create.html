@@ -1,26 +1,39 @@
 {% extends 'base.html' %}
 
-{% block title %}
-    Services
-{% endblock %}
+{% block page_title %} Services {% endblock %}
 
 {% block content %}
-<h1>Services</h1>
+<section class="content">
 
-
-    <form method="POST" action="{% url 'services:service_create' %}">
-        {% csrf_token%}
-        <div class="form-group">
-			<label>Service Name:</label>
-			{{form.name}}
-            <span class="help-block">{{ form.name.errors }}</span>
-		</div>
-
-        <div class="form-group">
-            <label>Description:</label>
-            {{form.description}}
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h2 class="box-title">Add Service</h2>
         </div>
-        <button type="submit" class="btn btn-md btn-success">Add</button>
-    </form>
+
+
+        <form class="form-horizontal" method="POST" action="{% url 'services:service_create' %}">
+            {% csrf_token%}
+            <div class="box-body">
+               <div class="form-group">
+                   <label>Service Name</label>
+                    {{ form.name }}
+                    <span class="help-block">{{ form.name.errors }}</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="" class="col-md-2 control-label">Description</label>
+                    <div class="col-md-4">
+                        {{ form.description }}
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</section>
 {% endblock %}
 

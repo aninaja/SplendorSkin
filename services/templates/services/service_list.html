@@ -36,6 +36,8 @@
 						<td>{{ service.description }}</td>
 						<td><a href="{% url 'services:service_edit' service.id %}" class="btn btn-md btn-info">
 							Edit</a>
+						<td><a href="{% url 'services:service_delete' service.id %}" class="btn btn-md btn-danger">
+						Delete</a>
 
 						</td>
 					</tr>

@@ -7,7 +7,7 @@ from django.contrib import messages
 
 # Create your views here.
 def service_list(request):
-    service_list = Service.objects.all()
+    service_list = Service.objects.exclude(status='Deleted')
     template_name = 'services/service_list.html'
     context = {'service_list': service_list}
     return render(request, template_name, context)
@@ -18,7 +18,7 @@ def service_create(request):
     if form.is_valid():
         form.save()
         messages.success(request,
-                         'Account updated successfully.')
+                         'Service created successfully.')
         return redirect('services:service_list')
     template_name = 'services/service_create.html'
     context = {'form': form}
@@ -30,10 +30,23 @@ def service_edit(request, pk):
     form = ServiceForm(request.POST or None, instance=service)
     if form.is_valid():
         form.save()
-
+        messages.success(request,
+                         'Service updated successfully.')
+        return redirect('services:service_list')
     template_name = 'services/service_edit.html'
     context = {'service': service, 'form': form}
     return render(request, template_name, context)
+
+
+def service_delete(request, pk):
+    service = get_object_or_404(Service, id=pk)
+    service.status = 'Deleted'
+    service.save()
+    messages.success(request,
+                     'Service has been marked as "Deleted".')
+    return redirect('services:service_list')
+    context = {'service': service}
+    return render(request, 'services/service_list.html', context)
 
 
 def treatment_area_list(request):
@@ -44,14 +57,12 @@ def treatment_area_list(request):
 
 
 def treatment_area_create(request):
-    if request.method == 'POST':
-        form = AreaForm(request.POST)
-        if form.is_valid():
-            form.save()
-
-    else:
-        form = AreaForm()
-
+    form = AreaForm(request.POST)
+    if form.is_valid():
+        form.save()
+        messages.success(request,
+                         'Treatment area created successfully.')
+        return redirect('services:treatment_area_list')
     template_name = 'services/treatedarea_create.html'
     context = {'form': form}
     return render(request, template_name, context)
@@ -62,6 +73,9 @@ def treatment_area_edit(request, pk):
     form = AreaForm(request.POST or None, instance=treatment_area)
     if form.is_valid():
         form.save()
+        messages.success(request,
+                         'Treatment area updated successfully.')
+        return redirect('services:treatment_area_list')
     template_name = 'services/treatedarea_edit.html'
     context = {'area': treatment_area, 'form': form}
     return render(request, template_name, context)
@@ -75,23 +89,25 @@ def price_type_list(request):
 
 
 def price_type_create(request):
-    form = TypeForm()
-    if request.method == 'POST':
-        form = TypeForm(request.POST)
-        if form.is_valid():
-            form.save()
-            form = TypeForm()
-
+    form = TypeForm(request.POST)
+    if form.is_valid():
+        form.save()
+        messages.success(request,
+                         'Price type created successfully.')
+        return redirect('services:price_type_list')
     template_name = 'services/pricetype_create.html'
     context = {'form': form}
     return render(request, template_name, context)
 
 
-def price_type_edit(request, id):
+def price_type_edit(request, pk):
     price_type = get_object_or_404(PriceType, id=pk)
     form = TypeForm(request.POST or None, instance=price_type)
     if form.is_valid():
         form.save()
+        messages.success(request,
+                         'Price type updated successfully.')
+        return redirect('services:price_type_list')
     template_name = 'services/pricetype_edit.html'
     context = {'price_type': price_type, 'form': form}
     return render(request, template_name, context)
@@ -101,17 +117,16 @@ def treatment_list(request):
     treatment_list = Treatment.objects.all()
     template_name = 'services/treatment_list.html'
     context = {'object_list': treatment_list}
-    return render(request, template_name, context)
+    return render(request, template_name, context);
 
 
 def treatment_create(request):
-    if request.method == 'POST':
-        form = TreatmentForm(request.POST)
-        if form.is_valid():
-            form.save()
-            form = TreatmentForm()
-    else:
-        form = TreatmentForm()
+    form = TreatmentForm(request.POST)
+    if form.is_valid():
+        form.save()
+        messages.success(request,
+                         'Treatment created successfully.')
+        return redirect('services:treatment_area_list')
     template_name = 'services/treatment_create.html'
     context = {'form': form}
     return render(request, template_name, context)
@@ -122,7 +137,9 @@ def treatment_edit(request, pk):
     form = TreatmentForm(request.POST or None, instance=treatment)
     if form.is_valid():
         form.save()
-
+        messages.success(request,
+                         'Treatment area created successfully.')
+        return redirect('services:treatment_area_list')
     template_name = 'services/treatment_edit.html'
     context = {'form': form, 'treatment': treatment}
     return render(request, template_name, context)

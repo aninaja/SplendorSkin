@@ -12,6 +12,7 @@ class Service(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(null=True, blank=True)
+    status = models.CharField(max_length=50, default='Available')
 
     def __str__(self):
         return self.name
