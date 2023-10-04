@@ -6,13 +6,14 @@
 
 {% block content %}
     <h1> Add Pricing Type </h1>
-    <form method="POST">
+    <form method="POST" action="">
         {% csrf_token %}
          <div class="form-group">
 			<label>Pricing Type:</label>
 			{{form.type}}
 		</div>
 
-         <button type="submit" class="btn btn-md btn-success">Add</button>
+        <button type="submit" class="btn btn-md btn-success">Add</button>
     </form>
+
 {% endblock %}

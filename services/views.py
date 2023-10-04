@@ -81,6 +81,15 @@ def treatment_area_edit(request, pk):
     return render(request, template_name, context)
 
 
+def treatment_area_delete(request, pk):
+    treatment_area = get_object_or_404(TreatmentArea, id=pk)
+    treatment_area.status = 'Deleted'
+    treatment_area.save()
+    messages.success(request,
+                     'Treatment area has been marked as deleted.')
+    return redirect('services:treatment_area_list')
+
+
 def price_type_list(request):
     pricing_type_list = PriceType.objects.all()
     context = {'ptype_list': pricing_type_list}
@@ -94,7 +103,7 @@ def price_type_create(request):
         form.save()
         messages.success(request,
                          'Price type created successfully.')
-        return redirect('services:price_type_list')
+        return redirect('services:pricetype_list')
     template_name = 'services/pricetype_create.html'
     context = {'form': form}
     return render(request, template_name, context)
@@ -113,6 +122,15 @@ def price_type_edit(request, pk):
     return render(request, template_name, context)
 
 
+def price_type_delete(request, pk):
+    price_type = get_object_or_404(PriceType, id=pk)
+    price_type.status = 'Deleted'
+    price_type.save()
+    messages.success(request,
+                     'Price type has been marked as deleted.')
+    return redirect('services:ptype_list')
+
+
 def treatment_list(request):
     treatment_list = Treatment.objects.all()
     template_name = 'services/treatment_list.html'
@@ -126,7 +144,7 @@ def treatment_create(request):
         form.save()
         messages.success(request,
                          'Treatment created successfully.')
-        return redirect('services:treatment_area_list')
+        return redirect('services:treatment_list')
     template_name = 'services/treatment_create.html'
     context = {'form': form}
     return render(request, template_name, context)
@@ -138,8 +156,17 @@ def treatment_edit(request, pk):
     if form.is_valid():
         form.save()
         messages.success(request,
-                         'Treatment area created successfully.')
-        return redirect('services:treatment_area_list')
+                         'Treatment created successfully.')
+        return redirect('services:treatment_list')
     template_name = 'services/treatment_edit.html'
     context = {'form': form, 'treatment': treatment}
     return render(request, template_name, context)
+
+
+def treatment_delete(request, pk):
+    treatment = get_object_or_404(Treatment, id=pk)
+    treatment.status = 'Deleted'
+    treatment.save()
+    messages.success(request,
+                     'Treatment has been marked as deleted.')
+    return redirect('services:treatment_list')

@@ -1,9 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
-import os, random
 from datetime import date
-from django.utils.html import mark_safe
 
 
 # Create your models here.
@@ -24,7 +22,7 @@ class CustomUser(AbstractUser):
     )
     birth_date = models.DateField(null=False, blank=True)
     email = models.EmailField(max_length=255, unique=True, null=False, blank=False)
-    mobile = models.CharField(max_length=100, unique=True, null=False, blank=False)
+    mobile = models.CharField(max_length=11, unique=True, null=False, blank=False)
     ROLE_CHOICES = [
         ('', '---------'),
         ('PATIENT', 'Patient'),
@@ -46,6 +44,7 @@ class CustomUser(AbstractUser):
 
     date_joined = models.DateTimeField(default=timezone.now())
     deleted_at = models.DateTimeField(null=True, blank=True)
+    status = models.CharField(max_length=50, default='Available')
 
     USERNAME_FIELD = 'mobile'
 

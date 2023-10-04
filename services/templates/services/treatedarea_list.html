@@ -5,7 +5,16 @@
 {% endblock %}
 
 {% block content %}
-    <h5><a href="{% url 'services:treatedarea_create' %}">Add Treatment Area</a></h5>
+    <h5><a href="{% url 'services:treatment_area_create' %}">Add Treatment Area</a></h5>
+
+	{% if messages %}
+    <div class="alert alert-success alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+      {% for message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    </div>
+    {% endif %}
 
 	<div class="table responsive">
 		<table class="table table-bordered table-striped table-hover">
@@ -21,12 +30,10 @@
 					<tr>
 						<td>{{ area.id }}</td>
 						<td>{{ area.area }}</td>
-						<td><a href="{% url 'services:area_edit' area.id %}" class="btn btn-md btn-info">
+						<td><a href="{% url 'services:treatment_area_edit' area.id %}" class="btn btn-md btn-info">
 							Edit</a>
-
-
-						</td>
-
+							<a href="{% url 'services:treatment_area_delete' area.id %}" class="btn btn-md btn-danger">
+							Delete</a>
 					</tr>
 				{% endfor %}
 

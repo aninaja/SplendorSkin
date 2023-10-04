@@ -58,6 +58,11 @@ class RegistrationForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control'}),
+        validators=[
+            RegexValidator(
+                regex=r'^09\d{9}$',
+                message='Invalid phone number format'),
+        ]
     )
 
     birth_date = forms.DateField(
