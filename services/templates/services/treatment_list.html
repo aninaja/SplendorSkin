@@ -31,20 +31,20 @@
 			</thead>
 
 			<tbody>
-				{% for treatment in object_list %}
+				{% for treatment in treatment_list %}
 					<tr>
 						<td>{{ treatment.id }}</td>
-						<td>{{ treatment.service_id }}</td>
+						<td>{{ treatment.service }}</td>
 						<td>{{ treatment.name }}</td>
 						<td>{{ treatment.description }}</td>
-						<td>{{ treatment.area_id }}</td>
-						<td>{{ treatment.type_id }}</td>
+						<td>{{ treatment.area }}</td>
+						<td>{{ treatment.type }}</td>
 						<td>{{ treatment.price }}</td>
 						<td><a href="{% url 'services:treatment_edit' treatment.id %}" class="btn btn-md btn-info">
 							Edit</a>
+							<a href="{% url 'services:treatment_delete' treatment.id %}" class="btn btn-md btn-danger">
+							Delete</a>
 						</td>
-						<td><a href="{% url 'services:treatment_delete' treatment.id %}" class="btn btn-md btn-danger">
-						Delete</a>
 
 					</tr>
 				{% endfor %}

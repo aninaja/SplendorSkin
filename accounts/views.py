@@ -1,3 +1,5 @@
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import CustomUser
 from .forms import RegistrationForm
@@ -34,3 +36,26 @@ def account_edit(request, pk):
     return render(request, template_name, context)
 
 
+def loginview(request):
+    return render(request, 'accounts/login.html')
+
+
+def process_login(request):
+    mobile = request.POST.get('username')
+    password = request.POST.get('password')
+
+    # Check if the mobile number exists and if the expected password matches
+    user = authenticate(request, username=mobile, password=password)
+
+    if user is not None:
+        login(request, user)
+        return HttpResponseRedirect('/accounts/list')
+    else:
+        return render(request, 'accounts/login.html', {
+            'error_message': "Login Failed"
+        })
+
+
+def process_logout(request):
+    logout(request)
+    return HttpResponseRedirect('/accounts/login')

@@ -16,9 +16,12 @@ class RegistrationForm(forms.ModelForm):
                 'class': 'form-control'}),
         validators=[
             RegexValidator(
-                regex=r'^[a-zA-Z]*$',
+                regex=r'^[a-zA-Z\s]*$',
                 message='Firstname must be letters only'),
-        ]
+        ],
+        error_messages={
+            'required': ''
+        }
     )
 
     last_name = forms.CharField(
@@ -27,9 +30,12 @@ class RegistrationForm(forms.ModelForm):
                 'class': 'form-control'}),
         validators=[
             RegexValidator(
-                regex=r'^[a-zA-Z]*$',
+                regex=r'^[a-zA-Z\s]*$',
                 message='Lastname must be letters only'),
-        ]
+        ],
+        error_messages={
+            'required': ''
+        }
     )
 
     middle_name = forms.CharField(
@@ -38,9 +44,12 @@ class RegistrationForm(forms.ModelForm):
                 'class': 'form-control'}),
         validators=[
             RegexValidator(
-                regex=r'^[a-zA-Z]*$',
+                regex=r'^[a-zA-Z\s]*$',
                 message='Middle name must be letters only'),
-        ]
+        ],
+        error_messages={
+            'required': ''
+        }
     )
 
     gender = forms.ChoiceField(
@@ -54,7 +63,7 @@ class RegistrationForm(forms.ModelForm):
                 'class': 'form-control'})
     )
 
-    mobile = forms.CharField(
+    username = forms.CharField(
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control'}),
@@ -62,7 +71,10 @@ class RegistrationForm(forms.ModelForm):
             RegexValidator(
                 regex=r'^09\d{9}$',
                 message='Invalid phone number format'),
-        ]
+        ],
+        error_messages={
+            'required': ''
+        }
     )
 
     birth_date = forms.DateField(
@@ -81,6 +93,6 @@ class RegistrationForm(forms.ModelForm):
             'middle_name',
             'gender',
             'email',
-            'mobile',
+            'username',
             'birth_date',
         ]

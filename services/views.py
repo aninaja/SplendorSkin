@@ -116,7 +116,7 @@ def price_type_edit(request, pk):
         form.save()
         messages.success(request,
                          'Price type updated successfully.')
-        return redirect('services:price_type_list')
+        return redirect('services:pricetype_list')
     template_name = 'services/pricetype_edit.html'
     context = {'price_type': price_type, 'form': form}
     return render(request, template_name, context)
@@ -134,7 +134,7 @@ def price_type_delete(request, pk):
 def treatment_list(request):
     treatment_list = Treatment.objects.all()
     template_name = 'services/treatment_list.html'
-    context = {'object_list': treatment_list}
+    context = {'treatment_list': treatment_list}
     return render(request, template_name, context);
 
 

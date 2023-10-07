@@ -12,9 +12,12 @@ class ServiceForm(ModelForm):
                 'class': 'form-control'}),
         validators=[
             RegexValidator(
-                regex=r'^[a-zA-Z]*$',
+                regex=r'^[a-zA-Z\s]*$',
                 message='Service name must be letters only'),
-        ]
+        ],
+        error_messages={
+            'required': ''
+        }
     )
 
     description = forms.CharField(
@@ -28,7 +31,7 @@ class ServiceForm(ModelForm):
 
 
 class TreatmentForm(ModelForm):
-    service_id = forms.ModelChoiceField(
+    service = forms.ModelChoiceField(
         queryset=Service.objects.all(),
         widget=forms.Select(
             attrs={
@@ -40,9 +43,12 @@ class TreatmentForm(ModelForm):
                 'class': 'form-control'}),
         validators=[
             RegexValidator(
-                regex=r'^[a-zA-Z]*$',
+                regex=r'^[a-zA-Z\s]*$',
                 message='Treatment name must be letters only'),
-        ]
+        ],
+        error_messages={
+            'required': ''
+        }
     )
 
     description = forms.CharField(
@@ -50,13 +56,13 @@ class TreatmentForm(ModelForm):
             attrs={
                 'class': 'form-control'}))
 
-    area_id = forms.ModelChoiceField(
+    area = forms.ModelChoiceField(
         queryset=TreatmentArea.objects.all(),
         widget=forms.Select(
             attrs={
                 'class': 'form-control'}))
 
-    type_id = forms.ModelChoiceField(
+    type = forms.ModelChoiceField(
         queryset=PriceType.objects.all(),
         widget=forms.Select(
             attrs={
@@ -66,16 +72,19 @@ class TreatmentForm(ModelForm):
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control'}),
+        error_messages={
+            'required': 'Price must be a number'
+        }
     )
 
     class Meta:
         model = Treatment
         fields = [
-            'service_id',
+            'service',
             'name',
             'description',
-            'area_id',
-            'type_id',
+            'area',
+            'type',
             'price',
         ]
 
@@ -87,9 +96,12 @@ class AreaForm(ModelForm):
                 'class': 'form-control'}),
         validators=[
             RegexValidator(
-                regex=r'^[a-zA-Z]*$',
+                regex=r'^[a-zA-Z\s]*$',
                 message='Treatment area must be letters only'),
-        ]
+        ],
+        error_messages={
+            'required': ''
+        }
     )
 
     class Meta:
@@ -104,9 +116,12 @@ class TypeForm(ModelForm):
                 'class': 'form-control'}),
         validators=[
             RegexValidator(
-                regex=r'^[a-zA-Z]*$',
+                regex=r'^[a-zA-Z\s]*$',
                 message='Price type must be letters only'),
-        ]
+        ],
+        error_messages={
+            'required': ''
+        }
     )
 
     class Meta:

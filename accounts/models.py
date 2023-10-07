@@ -1,3 +1,4 @@
+from django.contrib.auth.hashers import make_password
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
@@ -6,8 +7,9 @@ from datetime import date
 
 # Create your models here.
 
+
 class CustomUser(AbstractUser):
-    username = None
+    username = models.CharField(max_length=11, unique=True, null=False, blank=False)
     first_name = models.CharField(max_length=100, null=False, blank=False)
     last_name = models.CharField(max_length=1000, null=False, blank=False)
     middle_name = models.CharField(max_length=100, null=False, blank=False)
@@ -20,9 +22,8 @@ class CustomUser(AbstractUser):
         max_length=10,
         choices=GENDER_CHOICES,
     )
-    birth_date = models.DateField(null=False, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
     email = models.EmailField(max_length=255, unique=True, null=False, blank=False)
-    mobile = models.CharField(max_length=11, unique=True, null=False, blank=False)
     ROLE_CHOICES = [
         ('', '---------'),
         ('PATIENT', 'Patient'),
@@ -34,19 +35,11 @@ class CustomUser(AbstractUser):
         choices=ROLE_CHOICES,
     )
 
-    age = models.PositiveSmallIntegerField()
-
-    def save(self):
-        today = date.today()
-        age = today.year - self.birth_date.year - ((today.month, today.day) < (self.birth_date.month, self.birth_date.day))
-        self.age = age
-        super().save()
-
     date_joined = models.DateTimeField(default=timezone.now())
     deleted_at = models.DateTimeField(null=True, blank=True)
     status = models.CharField(max_length=50, default='Available')
 
-    USERNAME_FIELD = 'mobile'
+    USERNAME_FIELD = 'username'
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

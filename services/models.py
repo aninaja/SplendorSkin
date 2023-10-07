@@ -48,9 +48,9 @@ class PriceType(models.Model):
 
 
 class Treatment(models.Model):
-    service_id = models.ForeignKey(Service, on_delete=models.DO_NOTHING)
-    area_id = models.ForeignKey(TreatmentArea, on_delete=models.DO_NOTHING)
-    type_id = models.ForeignKey(PriceType, on_delete=models.DO_NOTHING)
+    service = models.ForeignKey(Service, on_delete=models.DO_NOTHING)
+    area = models.ForeignKey(TreatmentArea, on_delete=models.DO_NOTHING)
+    type = models.ForeignKey(PriceType, on_delete=models.DO_NOTHING)
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)

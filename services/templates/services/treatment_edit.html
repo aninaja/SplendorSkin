@@ -11,12 +11,13 @@
 
         <div class="form-group">
 			<label>Service Name:</label>
-			{{form.service_id}}
+			{{form.service}}
 		</div>
 
         <div class="form-group">
 			<label>Treatment Name:</label>
 			{{form.name}}
+			{{form.name.errors}}
 		</div>
 
 		<div class="form-group">
@@ -26,17 +27,18 @@
 
         <div class="form-group">
 			<label>Treatment Area:</label>
-			{{form.area_id}}
+			{{form.area}}
 		</div>
 
         <div class="form-group">
 			<label>Pricing Type:</label>
-			{{form.type_id}}
+			{{form.type}}
 		</div>
 
          <div class="form-group">
 			<label>Price:</label>
 			{{form.price}}
+			{{form.price.errors}}
 		</div>
 
         <button type="submit" class="btn btn-info mt-2">Update</button>
