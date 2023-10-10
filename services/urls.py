@@ -17,10 +17,10 @@ urlpatterns = [
     path('<int:pk>/delete', views.treatment_area_delete, name='treatment_area_delete'),
 
     # price type
-    path('price-type/list/', views.price_type_list, name='pricetype_list'),
-    path('price-type/create/', views.price_type_create, name='pricetype_create'),
-    path('price-type/<int:pk>/edit', views.price_type_edit, name='pricetype_edit'),
-    path('<int:pk>/delete', views.price_type_delete, name='pricetype_delete'),
+    path('price-type/list/', views.price_type_list, name='price_type_list'),
+    path('price-type/create/', views.price_type_create, name='price_type_create'),
+    path('price-type/<int:pk>/edit', views.price_type_edit, name='price_type_edit'),
+    path('<int:pk>/delete', views.price_type_delete, name='price_type_delete'),
 
     # treatment
     path('treatment/list/', views.treatment_list, name='treatment_list'),

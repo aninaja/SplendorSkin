@@ -23,6 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-p=6j69w&o+^y)azx-)@rwsq46*5^*g5%uxai+8$jy5dg=^xx$5'
 
+LOGIN_REDIRECT_URL = '/accounts/list'
+
 LOGIN_URL = '/'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -42,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'services',
     'accounts',
-    'auth_login',
+    'bookings',
 
 
 ]

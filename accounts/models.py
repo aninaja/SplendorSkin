@@ -35,7 +35,7 @@ class CustomUser(AbstractUser):
         choices=ROLE_CHOICES,
     )
 
-    date_joined = models.DateTimeField(default=timezone.now())
+    date_joined = models.DateTimeField(default=timezone.now)
     deleted_at = models.DateTimeField(null=True, blank=True)
     status = models.CharField(max_length=50, default='Available')
 

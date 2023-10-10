@@ -2,6 +2,7 @@ from django import forms
 from django.core.validators import RegexValidator
 from django.forms import NumberInput
 from .models import CustomUser
+from django.contrib.auth.forms import AuthenticationForm
 
 
 class RegistrationForm(forms.ModelForm):
@@ -96,3 +97,24 @@ class RegistrationForm(forms.ModelForm):
             'username',
             'birth_date',
         ]
+
+
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(  # This is always 'username'
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'name': 'email',
+                'placeholder': 'Email'}
+        )
+    )
+    password = forms.CharField(
+        max_length=100,
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+                'name': 'password',
+                'placeholder': 'Password'}
+        )
+    )

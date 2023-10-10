@@ -44,13 +44,11 @@ def service_delete(request, pk):
     service.save()
     messages.success(request,
                      'Service has been marked as "Deleted".')
-    return redirect('services:service_list')
-    context = {'service': service}
-    return render(request, 'services/service_list.html', context)
+    return redirect('services:treatment_list')
 
 
 def treatment_area_list(request):
-    treatment_area_list = TreatmentArea.objects.all()
+    treatment_area_list = TreatmentArea.objects.exclude(status='Deleted')
     template_name = 'services/treatedarea_list.html'
     context = {'area_list': treatment_area_list}
     return render(request, template_name, context)
@@ -87,13 +85,13 @@ def treatment_area_delete(request, pk):
     treatment_area.save()
     messages.success(request,
                      'Treatment area has been marked as deleted.')
-    return redirect('services:treatment_area_list')
+    return redirect('services:treatment_area_delete')
 
 
 def price_type_list(request):
-    pricing_type_list = PriceType.objects.all()
-    context = {'ptype_list': pricing_type_list}
+    pricing_type_list = PriceType.objects.exclude(status='Deleted')
     template_name = 'services/pricetype_list.html'
+    context = {'ptype_list': pricing_type_list}
     return render(request, template_name, context)
 
 
@@ -103,7 +101,7 @@ def price_type_create(request):
         form.save()
         messages.success(request,
                          'Price type created successfully.')
-        return redirect('services:pricetype_list')
+        return redirect('services:price_type_list')
     template_name = 'services/pricetype_create.html'
     context = {'form': form}
     return render(request, template_name, context)
@@ -116,7 +114,7 @@ def price_type_edit(request, pk):
         form.save()
         messages.success(request,
                          'Price type updated successfully.')
-        return redirect('services:pricetype_list')
+        return redirect('services:price_type_list')
     template_name = 'services/pricetype_edit.html'
     context = {'price_type': price_type, 'form': form}
     return render(request, template_name, context)
@@ -128,14 +126,17 @@ def price_type_delete(request, pk):
     price_type.save()
     messages.success(request,
                      'Price type has been marked as deleted.')
-    return redirect('services:ptype_list')
+    return redirect('services:price_type_list')
+    template_name = 'services/pricetype_list.html'
+    context = {'price_type': price_type}
+    return render(request, template_name, context)
 
 
 def treatment_list(request):
-    treatment_list = Treatment.objects.all()
+    treatment_list = Treatment.objects.exclude(status='Deleted')
     template_name = 'services/treatment_list.html'
     context = {'treatment_list': treatment_list}
-    return render(request, template_name, context);
+    return render(request, template_name, context)
 
 
 def treatment_create(request):
