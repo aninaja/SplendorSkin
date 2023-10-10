@@ -32,7 +32,7 @@ class ServiceForm(ModelForm):
 
 class TreatmentForm(ModelForm):
     service = forms.ModelChoiceField(
-        queryset=Service.objects.all(),
+        queryset=Service.objects.exclude(status='Deleted'),
         widget=forms.Select(
             attrs={
                 'class': 'form-control'}))
@@ -57,13 +57,13 @@ class TreatmentForm(ModelForm):
                 'class': 'form-control'}))
 
     area = forms.ModelChoiceField(
-        queryset=TreatmentArea.objects.all(),
+        queryset=TreatmentArea.objects.exclude(status='Deleted'),
         widget=forms.Select(
             attrs={
                 'class': 'form-control'}))
 
     type = forms.ModelChoiceField(
-        queryset=PriceType.objects.all(),
+        queryset=PriceType.objects.exclude(status='Deleted'),
         widget=forms.Select(
             attrs={
                 'class': 'form-control'}))

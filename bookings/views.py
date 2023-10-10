@@ -7,16 +7,15 @@ from .models import Treatment
 
 
 # Create your views here.
-def set_appointment(request):
-    treatment_instance = get_object_or_404(Treatment)
-    form = BookingForm(request.POST or None, initial={'treatment': treatment_instance})
+def appointment_set(request):
+    form = BookingForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
-            form.save(commit=False)
+            form.save()
             return redirect('bookings:appointment_list')
 
-    context = {'form': form, 'treatment_instance': treatment_instance}
-    return render(request, 'bookings/booking_create.html', context)
+    context = {'form': form}
+    return render(request, 'bookings/appointment_set.html', context)
 
 
 def appointment_list(request):

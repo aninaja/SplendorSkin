@@ -44,7 +44,7 @@ def service_delete(request, pk):
     service.save()
     messages.success(request,
                      'Service has been marked as "Deleted".')
-    return redirect('services:treatment_list')
+    return redirect('services:service_list')
 
 
 def treatment_area_list(request):
@@ -85,7 +85,7 @@ def treatment_area_delete(request, pk):
     treatment_area.save()
     messages.success(request,
                      'Treatment area has been marked as deleted.')
-    return redirect('services:treatment_area_delete')
+    return redirect('services:treatment_area_list')
 
 
 def price_type_list(request):
