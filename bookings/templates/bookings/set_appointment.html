@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Pricing Type
+{% endblock %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+			<label>Day:</label>
+			{{form.day}}
+            {{form.day.errors}}
+		</div>
+
+        <div class="form-group">
+			<label>Time:</label>
+			{{form.time}}
+            {{form.time.errors}}
+		</div>
+
+          <div class="form-group">
+			<label>Treatment:</label>
+			{{form.treatment.id}}
+            {{form.treatment.errors}}
+		</div>
+
+        <button type="submit" class="btn btn-md btn-success">Add</button>
+    </form>
+
+{% endblock %}
